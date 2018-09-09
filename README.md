@@ -1,1 +1,2 @@
-# rest-java-musbands
+# Musbands (Music Bands)
+API Rest
