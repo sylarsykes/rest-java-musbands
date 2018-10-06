@@ -1,10 +1,9 @@
-package org.sylrsykssoft.rest.java.musbands.core.domain;
+package org.sylrsykssoft.rest.java.musbands.audit.domain;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.EntityListeners;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -14,7 +13,6 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-import org.sylrsykssoft.rest.java.musbands.core.listener.AuditListener;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,7 +37,6 @@ import lombok.Setter;
 @Setter()
 @Getter()
 @EqualsAndHashCode(callSuper = false, doNotUseGetters = true)
-@EntityListeners(AuditListener.class)
 public class Audit {
 
 	@Column(name = "created_at", nullable = false, insertable = true, updatable = false)

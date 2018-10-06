@@ -1,4 +1,4 @@
-package org.sylrsykssoft.rest.java.musbands.core.domain;
+package org.sylrsykssoft.rest.java.musbands.audit.domain;
 
 /**
  * @author juan.gonzalez.fernandez.jgf

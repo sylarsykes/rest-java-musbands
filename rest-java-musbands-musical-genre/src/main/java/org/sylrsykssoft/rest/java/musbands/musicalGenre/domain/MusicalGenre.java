@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-import org.sylrsykssoft.rest.java.musbands.core.domain.Audit;
-import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdminAudit;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.Audit;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.BaseAdminAudit;
 import org.sylrsykssoft.rest.java.musbands.core.domain.FactoryAdminDomain;
 
 import lombok.AccessLevel;
