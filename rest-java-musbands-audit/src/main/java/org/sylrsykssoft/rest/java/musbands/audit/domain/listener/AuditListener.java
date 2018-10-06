@@ -1,4 +1,4 @@
-package org.sylrsykssoft.rest.java.musbands.core.listener;
+package org.sylrsykssoft.rest.java.musbands.audit.domain.listener;
 
 import java.util.Date;
 
@@ -8,8 +8,8 @@ import javax.persistence.PreUpdate;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.sylrsykssoft.rest.java.musbands.core.domain.Audit;
-import org.sylrsykssoft.rest.java.musbands.core.domain.IAuditable;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.Audit;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.IAuditable;
 
 /**
  * Audit listener

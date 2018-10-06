@@ -1,4 +1,4 @@
-package org.sylrsykssoft.rest.java.musbands.core.domain;
+package org.sylrsykssoft.rest.java.musbands.audit.domain;
 
 import java.beans.ConstructorProperties;
 import java.util.Date;
@@ -8,7 +8,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
 import org.springframework.stereotype.Component;
-import org.sylrsykssoft.rest.java.musbands.core.listener.AuditListener;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.listener.AuditListener;
+import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
