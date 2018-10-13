@@ -76,7 +76,7 @@ public class AuditListener {
 	}
 
 	/**
-	 * Get username
+	 * Getter username
 	 * 
 	 * @return Optional<String>
 	 */
@@ -87,7 +87,7 @@ public class AuditListener {
 	}
 	
 	/**
-	 * 
+	 * Getter audit
 	 * 
 	 * @param auditableObject
 	 * @return

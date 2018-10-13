@@ -19,6 +19,14 @@ import org.sylrsykssoft.rest.java.musbands.core.service.BaseEntityService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Base controller
+ * 
+ * @author juan.gonzalez.fernandez.jgf
+ *
+ * @param <R> Resource class
+ * @param <T> Entity class
+ */
 @Slf4j()
 public class BaseController<R extends BaseEntityResource, T extends BaseEntity> {
 

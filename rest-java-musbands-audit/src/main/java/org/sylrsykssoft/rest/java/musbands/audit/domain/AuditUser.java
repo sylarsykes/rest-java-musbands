@@ -18,6 +18,8 @@ import lombok.NonNull;
 import lombok.Setter;
 
 /**
+ * Audit User Entity
+ * 
  * @author juan.gonzalez.fernandez.jgf
  */
 @Entity

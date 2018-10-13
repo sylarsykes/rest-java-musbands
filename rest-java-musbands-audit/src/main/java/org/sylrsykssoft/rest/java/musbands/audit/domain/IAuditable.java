@@ -1,6 +1,8 @@
 package org.sylrsykssoft.rest.java.musbands.audit.domain;
 
 /**
+ * Audit interface
+ * 
  * @author juan.gonzalez.fernandez.jgf
  *
  */
