@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.sylrsykssoft.rest.java.musbands.core.domain.FactoryAdminDomain;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.domain.MusicalGenre;
@@ -18,6 +19,14 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.domain.builder.FactoryMu
 @Configuration
 @ComponentScan("org.sylrsykssoft.rest.java.musbands.musicalGenre.domain")
 public class DomainConfiguration {
+	
+	@Bean
+	@Primary
+	@Scope(value = "prototype")
+	@Lazy(value = true)
+	public MusicalGenreBuilder builder() {
+		return MusicalGenre.builder();
+	}
 	
 	@Bean
 	@Scope(value = "prototype")
