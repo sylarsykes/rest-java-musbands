@@ -8,8 +8,8 @@
   <artifactId>rest-java-musbands-audit</artifactId>
   
   <name>rest-java-musbands-audit</name>
-  <description>API Rest Musical Genre for Java Musbands Repository</description> 
-  <url>https://github.com/sylarsykes/rest-java-musbands/blob/master/rest-java-musbands-musical-genre</url>
+  <description>Audit module for Java Musbands Repository</description> 
+  <url>https://github.com/sylarsykes/rest-java-musbands/blob/master/rest-java-musbands-audit</url>
 	
   <dependencies>
     <dependency>

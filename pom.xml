@@ -107,6 +107,7 @@
     <modules>
     	<module>rest-java-musbands-core</module>
     	<module>rest-java-musbands-audit</module>
+    	<module>rest-java-musbands-security</module>
     	<module>rest-java-musbands-musical-genre</module>
     </modules>
 
