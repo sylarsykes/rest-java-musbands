@@ -1,10 +1,17 @@
 package org.sylrsykssoft.rest.java.musbands.core.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.sylrsykssoft.rest.java.musbands.core.controller.resource.BaseAdminResource;
 import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
+import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
 import org.sylrsykssoft.rest.java.musbands.core.repository.BaseAdminRepository;
+import org.sylrsykssoft.rest.java.musbands.core.util.BaseAdminModelMapperEntityToResourceFunction;
+import org.sylrsykssoft.rest.java.musbands.core.util.BaseAdminModelMapperResourceToEntityFunction;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,80 +23,182 @@ import lombok.extern.slf4j.Slf4j;
  * @param <T> Type class.
  */
 @Slf4j()
-public class BaseAdminService<T extends BaseAdmin> implements AdminService<T, Integer> {
+public class BaseAdminService<T extends BaseAdmin, R extends BaseAdminResource> implements AdminService<T, R, Integer> {
 
 	@Autowired()
-	private BaseAdminRepository<T> adminRepository;
+	protected BaseAdminRepository<T> superAdminRepository;
+
+	@Autowired()
+	protected BaseAdminModelMapperEntityToResourceFunction<T, R> baseAdminModelMapperEntityToResourceFunction;
 	
+	@Autowired()
+	protected BaseAdminModelMapperResourceToEntityFunction<R, T> baseAdminModelMapperResourceToEntityFunction;
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override()
-	public Optional<T> findByName(String name) {
+	public Optional<R> findByName(final String name) throws NotFoundEntityException {
 		LOGGER.info("BaseAdminService:findByName Find by name {}.", name);
-		return adminRepository.findByName(name);
+
+		final Optional<T> source = superAdminRepository.findByName(name);
+
+		LOGGER.info("Exit -> {} ", source);
+		return Optional.of(baseAdminModelMapperEntityToResourceFunction.apply(source.get()));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override()
+	public Optional<R> findById(Integer id) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminService:findOne Find one by id {}.", id);
+
+		final Optional<T> source = superAdminRepository.findById(id);
+
+		LOGGER.info("Exit -> {} ", source);
+		return Optional.of(baseAdminModelMapperEntityToResourceFunction.apply(source.get()));
 	}
 	
-	@Override()
-	public <S extends T> S save(S entity) {
-		LOGGER.info("BaseAdminService:save Save entity {}.", entity);
-		return adminRepository.save(entity);
-	}
-
-	@Override()
-	public <S extends T> Iterable<S> saveAll(Iterable<S> entities) {
-		LOGGER.info("BaseAdminService:saveAll Save entities {}.", entities);
-		return adminRepository.saveAll(entities);
-	}
-
-	@Override()
-	public Optional<T> findById(Integer id) {
-		LOGGER.info("BaseAdminService:findOne Find one by id {}.", id);
-		return adminRepository.findById(id);
-	}
-
-	@Override()
-	public boolean existsById(Integer id) {
-		LOGGER.info("BaseAdminService:exists Exists entity by id {}.", id);
-		return adminRepository.existsById(id);
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Iterable<T> findAll() {
+	public R getOne(Integer id) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminService:findOne Find one by id {}.", id);
+		
+		final T source = superAdminRepository.getOne(id);
+		
+		return baseAdminModelMapperEntityToResourceFunction.apply(source);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<R> findAll() {
 		LOGGER.info("BaseAdminService:findAll Find all.");
-		return adminRepository.findAll();
+
+		List<T> sources = superAdminRepository.findAll();
+
+		LOGGER.info("Exit -> {} ", sources);
+
+		return sources.stream().map(baseAdminModelMapperEntityToResourceFunction::apply).collect(Collectors.toList());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override()
-	public Iterable<T> findAllById(Iterable<Integer> ids) {
+	public List<R> findAllById(Iterable<Integer> ids) {
 		LOGGER.info("BaseAdminService:findAll Find all by ids {}.", ids);
-		return adminRepository.findAllById(ids);
+
+		List<T> sources = superAdminRepository.findAllById(ids);
+
+		LOGGER.info("Exit -> {} ", sources);
+		return sources.stream().map(baseAdminModelMapperEntityToResourceFunction::apply).collect(Collectors.toList());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override()
 	public long count() {
 		LOGGER.info("BaseAdminService:count Count.");
-		return adminRepository.count();
+		
+		long c = superAdminRepository.count();
+		
+		LOGGER.info("Exit -> {} ", c);
+		return c;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override()
+	public boolean existsById(Integer id) {
+		LOGGER.info("BaseAdminService:exists Exists entity by id {}.", id);
+		
+		return superAdminRepository.existsById(id);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override()
+	public R save(final R entity) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminService:save Save entity {}.", entity);
+		
+		if (entity.getID() != null && !existsById(entity.getID())) {
+			throw new NotFoundEntityException();
+		}
+		
+		T source = superAdminRepository.save(baseAdminModelMapperResourceToEntityFunction.apply(entity));
+		
+		LOGGER.info("Exit -> {} ", source);
+		return baseAdminModelMapperEntityToResourceFunction.apply(source);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override()
+	public List<R> saveAll(final Iterable<R> sources) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminService:saveAll Save entities {}.", sources);
+		
+		Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
+				.map(baseAdminModelMapperResourceToEntityFunction::apply)
+				.collect(Collectors.toList());
+		
+		LOGGER.info("Exit -> {} ", entities);
+		
+		return StreamSupport.stream(entities.spliterator(), false)
+				.map(baseAdminModelMapperEntityToResourceFunction::apply)
+				.collect(Collectors.toList());
 	}
 
 	@Override()
-	public void deleteById(Integer id) {
+	public void deleteById(Integer id) throws NotFoundEntityException {
 		LOGGER.info("BaseAdminService:delete Delete entity by id {}.", id);
-		adminRepository.deleteById(id);
+		superAdminRepository.deleteById(id);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override()
-	public void delete(T entity) {
-		LOGGER.info("BaseAdminService:delete Delete by entity {}.", entity);
-		adminRepository.delete(entity);
+	public void delete(R source) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminService:delete Delete by entity {}.", source);
+		
+		if (source.getID() != null && !existsById(source.getID())) {
+			throw new NotFoundEntityException();
+		}
+		
+		T entity = baseAdminModelMapperResourceToEntityFunction.apply(source);
+		superAdminRepository.delete(entity);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override()
-	public void deleteAll(Iterable<? extends T> entities) {
-		LOGGER.info("BaseAdminService:delete Delete entities by list {}.", entities);
-		adminRepository.deleteAll(entities);
+	public void deleteAll(Iterable<? extends R> sources) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminService:delete Delete entities by list {}.", sources);
+		
+		Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
+				.map(baseAdminModelMapperResourceToEntityFunction::apply)
+				.collect(Collectors.toList());
+		
+		superAdminRepository.deleteAll(entities);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override()
 	public void deleteAll() {
 		LOGGER.info("BaseAdminService:deleteAll Delete all entities.");
-		adminRepository.deleteAll();
+		superAdminRepository.deleteAll();
 	}
+
 }

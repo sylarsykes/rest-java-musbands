@@ -1,11 +1,16 @@
 package org.sylrsykssoft.rest.java.musbands.core.service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
-import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
+import javax.persistence.EntityManager;
 
-public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
+import org.sylrsykssoft.rest.java.musbands.core.controller.resource.BaseAdminResource;
+import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
+import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
+
+public interface AdminService<T extends BaseAdmin, R extends BaseAdminResource, ID extends Serializable> {
 	/**
 	 * Find by name.
 	 * 
@@ -13,26 +18,8 @@ public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
 	 * 
 	 * @return T entity.
 	 */
-	Optional<T> findByName(final String name);
+	Optional<R> findByName(final String name) throws NotFoundEntityException;
 	
-	/**
-	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
-	 * entity instance completely.
-	 * 
-	 * @param entity must not be {@literal null}.
-	 * @return the saved entity will never be {@literal null}.
-	 */
-	<S extends T> S save(S entity);
-
-	/**
-	 * Saves all given entities.
-	 * 
-	 * @param entities must not be {@literal null}.
-	 * @return the saved entities will never be {@literal null}.
-	 * @throws IllegalArgumentException in case the given entity is {@literal null}.
-	 */
-	<S extends T> Iterable<S> saveAll(Iterable<S> entities);
-
 	/**
 	 * Retrieves an entity by its id.
 	 * 
@@ -40,8 +27,34 @@ public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
 	 * @return the entity with the given id or {@literal Optional#empty()} if none found
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}.
 	 */
-	Optional<T> findById(ID id);
+	Optional<R> findById(ID id) throws NotFoundEntityException;
+	
+	/**
+	 * Returns a reference to the entity with the given identifier.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return a reference to the entity with the given identifier.
+	 * @see EntityManager#getReference(Class, Object)
+	 * @throws javax.persistence.EntityNotFoundException if no entity exists for given {@code id}.
+	 */
+	R getOne(ID id) throws NotFoundEntityException;
 
+	/**
+	 * Returns all instances of the type.
+	 * 
+	 * @return all entities
+	 */
+	List<R> findAll();
+
+	/**
+	 * Returns all instances of the type with the given IDs.
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	List<R> findAllById(Iterable<ID> ids);
+
+	
 	/**
 	 * Returns whether an entity with the given id exists.
 	 * 
@@ -50,28 +63,31 @@ public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}.
 	 */
 	boolean existsById(ID id);
-
-	/**
-	 * Returns all instances of the type.
-	 * 
-	 * @return all entities
-	 */
-	Iterable<T> findAll();
-
-	/**
-	 * Returns all instances of the type with the given IDs.
-	 * 
-	 * @param ids
-	 * @return
-	 */
-	Iterable<T> findAllById(Iterable<ID> ids);
-
+	
 	/**
 	 * Returns the number of entities available.
 	 * 
 	 * @return the number of entities
 	 */
 	long count();
+	
+	/**
+	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
+	 * entity instance completely.
+	 * 
+	 * @param entity must not be {@literal null}.
+	 * @return the saved entity will never be {@literal null}.
+	 */
+	R save(R entity) throws NotFoundEntityException;
+
+	/**
+	 * Saves all given entities.
+	 * 
+	 * @param entities must not be {@literal null}.
+	 * @return the saved entities will never be {@literal null}.
+	 * @throws IllegalArgumentException in case the given entity is {@literal null}.
+	 */
+	List<R> saveAll(Iterable<R> entities) throws NotFoundEntityException;
 
 	/**
 	 * Deletes the entity with the given id.
@@ -79,7 +95,7 @@ public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
 	 * @param id must not be {@literal null}.
 	 * @throws IllegalArgumentException in case the given {@code id} is {@literal null}
 	 */
-	void deleteById(ID id);
+	void deleteById(ID id) throws NotFoundEntityException;
 
 	/**
 	 * Deletes a given entity.
@@ -87,7 +103,7 @@ public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
 	 * @param entity
 	 * @throws IllegalArgumentException in case the given entity is {@literal null}.
 	 */
-	void delete(T entity);
+	void delete(R entity) throws NotFoundEntityException;
 
 	/**
 	 * Deletes the given entities.
@@ -95,7 +111,7 @@ public interface AdminService<T extends BaseAdmin, ID extends Serializable> {
 	 * @param entities
 	 * @throws IllegalArgumentException in case the given {@link Iterable} is {@literal null}.
 	 */
-	void deleteAll(Iterable<? extends T> entities);
+	void deleteAll(Iterable<? extends R> entities) throws NotFoundEntityException;
 
 	/**
 	 * Deletes all entities managed by the repository.
