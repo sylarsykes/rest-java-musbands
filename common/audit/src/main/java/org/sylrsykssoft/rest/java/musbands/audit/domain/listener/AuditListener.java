@@ -50,8 +50,7 @@ public class AuditListener {
 			Date date = new Date();
 			audit.setUpdatedAt(date);
 			
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			String username = auth.getName();
+			String username = getUsername();
 			audit.setLastModifiedBy(username);
 		}
 	}
@@ -69,8 +68,7 @@ public class AuditListener {
 			Date date = new Date();
 			audit.setDeletedAt(date);
 			
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			String username = auth.getName();
+			String username = getUsername();
 			audit.setLastModifiedBy(username);
 		}
 	}

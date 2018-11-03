@@ -1,5 +1,7 @@
 package org.sylrsykssoft.rest.java.musbands.musicalGenre.service;
 
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -15,6 +17,11 @@ import org.sylrsykssoft.rest.java.musbands.configuration.configuration.Configura
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.RestJavaMusbandsMusicalGenreApplication;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.MusicalGenreResource;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.MusicalGenreResource.MusicalGenreResourceBuilder;
+import org.sylrsykssoft.rest.java.musbands.musicalGenre.exception.MusicalGenreException;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Musical genre service test.
@@ -47,15 +54,33 @@ public class MusicalGenreServiceTest {
 
 	@Test
 	public void testCreateMusicalGenre() {
+		String name = "Pop punk";
 		final MusicalGenreResource musicalGenreSaved = musicalGenreService.save(domain);
 
-		Assert.assertNotNull(musicalGenreSaved);
+		assertThat("Entity did not get an generated Id!", musicalGenreSaved.getID(), greaterThan(-1));
+        assertThat("Entity name did not match!", musicalGenreSaved.getName(), is(name));
+		
 	}
 	
 	@Test
 	public void testFindAllMusicalGenres() {
 		Iterable<MusicalGenreResource> musicalGenres = musicalGenreService.findAll();
 		Assert.assertNotNull(musicalGenres);
+	}
+	
+	@Test
+	public void testUpdateMusicalGenre() {
+		String name = "Pop punk";
+		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
+		
+		MusicalGenreResource resourceGet = optResource.orElseThrow(IllegalStateException::new);
+		
+		assertThat("Entity name did not match!", resourceGet.getName(), is(name));
+		
+		MusicalGenreResource resourceUpdated = musicalGenreService.save(resourceBuilder.id(resourceGet.getID()).name(resourceGet.getName())
+				.description(resourceGet.getDescription() + " El ir.").build());
+		
+		assertThat("Entity id did not match!", resourceUpdated.getID(), is(resourceGet.getID()));
 	}
 
 }

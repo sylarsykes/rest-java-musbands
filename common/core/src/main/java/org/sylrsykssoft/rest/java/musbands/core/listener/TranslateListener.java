@@ -3,6 +3,7 @@ package org.sylrsykssoft.rest.java.musbands.core.listener;
 import java.util.Locale;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sylrsykssoft.rest.java.musbands.core.domain.ITranslatable;
@@ -26,6 +27,22 @@ public class TranslateListener {
 		if (translatebleObject instanceof ITranslatable) {
 			Translate translate = getTranslatable((ITranslatable) translatebleObject);
 
+			if (StringUtils.isEmpty(translate.getLocale())) {
+				translate.setLocale(Locale.UK.getLanguage());
+			}
+		}
+	}
+	
+	/**
+	 * Assign locale.
+	 * 
+	 * @param base
+	 */
+	@PreUpdate
+	void onPreUpdate(final Object translatebleObject) {
+		if (translatebleObject instanceof ITranslatable) {
+			Translate translate = getTranslatable((ITranslatable) translatebleObject);
+			
 			if (StringUtils.isEmpty(translate.getLocale())) {
 				translate.setLocale(Locale.UK.getLanguage());
 			}
