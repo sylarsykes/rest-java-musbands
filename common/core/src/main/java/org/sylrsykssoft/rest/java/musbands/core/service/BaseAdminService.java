@@ -37,7 +37,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 		final Optional<T> source = superAdminRepository.findByName(name);
 
 		LOGGER.info("Exit -> {} ", source);
-		return Optional.of(getMapperEntityToResource().apply(source.get()));
+		return Optional.of(source.flatMap(
+				(input) -> (input == null) ? Optional.empty() : Optional.of(getMapperEntityToResource().apply(input)))
+				.orElseThrow(NotFoundEntityException::new));
 	}
 
 	/**
@@ -50,7 +52,10 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 		final Optional<T> source = superAdminRepository.findById(id);
 
 		LOGGER.info("Exit -> {} ", source);
-		return Optional.of(getMapperEntityToResource().apply(source.get()));
+		
+		return Optional.of(source.flatMap(
+				(input) -> (input == null) ? Optional.empty() : Optional.of(getMapperEntityToResource().apply(input)))
+				.orElseThrow(NotFoundEntityException::new));
 	}
 	
 	/**

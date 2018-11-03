@@ -25,7 +25,7 @@ import lombok.Setter;
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@Setter(value = AccessLevel.PACKAGE)
+@Setter()
 @Getter()
 @EqualsAndHashCode(callSuper = false, doNotUseGetters = true)
 public class BaseAdminResource extends BaseResource {
