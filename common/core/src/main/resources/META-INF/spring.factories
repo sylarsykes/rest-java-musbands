@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.sylrsykssoft.rest.java.musbands.core.configuration.CoreConfiguration,\
+org.sylrsykssoft.rest.java.musbands.core.configuration.CoreDomainConfiguration,\
+org.sylrsykssoft.rest.java.musbands.core.configuration.CoreControllerConfiguration,\
+org.sylrsykssoft.rest.java.musbands.core.configuration.CoreUtilConfiguration,\
+org.sylrsykssoft.rest.java.musbands.core.configuration.CoreCacheConfiguration
