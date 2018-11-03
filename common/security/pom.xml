@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+	  <groupId>org.sylrsykssoft</groupId>
+	  <artifactId>rest-java-musbands-common</artifactId>
+	  <version>0.1.0-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>rest-java-musbands-security</artifactId>
+	<packaging>jar</packaging>
+
+	<name>rest-java-musbands-security</name>
+	<description>Security for Java Musbands Repository</description> 
+	<url>https://github.com/sylarsykes/rest-java-musbands/blob/master/common/security</url>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.sylrsykssoft</groupId>
+			<artifactId>rest-java-musbands-core-starter</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	
+</project>

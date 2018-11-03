@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+	  <groupId>org.sylrsykssoft</groupId>
+	  <artifactId>rest-java-musbands</artifactId>
+	  <version>0.1.0-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>rest-java-musbands-restapi</artifactId>
+	<packaging>pom</packaging>
+
+	<name>rest-java-musbands-restapi</name>
+	<description>API Rest Java Musbands</description> 
+	<url>https://github.com/sylarsykes/rest-java-musbands/blob/master/restapi</url>
+
+	<modules>
+    	<module>configuration</module>
+    	<module>musical_genre</module>
+    </modules>
+</project>

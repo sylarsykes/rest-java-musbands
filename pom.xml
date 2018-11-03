@@ -4,7 +4,7 @@
 
 	<groupId>org.sylrsykssoft</groupId>
 	<artifactId>rest-java-musbands</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>rest-java-musbands</name>
@@ -35,15 +35,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<rest-java-musbands.version>0.1.0-SNAPSHOT</rest-java-musbands.version>
 		<java.version>1.8</java.version>
-		<java.exec>C:\Program Files\Java\jre1.8.0_171\bin\javac.exe</java.exec>
-		<app.groupId>org.sylrsykssoft</app.groupId>
-		<app.artifactId>rest-java-musbands</app.artifactId>
-		<app.version>0.0.1-SNAPSHOT</app.version>
 		<slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <commons-lang.version>3.7</commons-lang.version>
 		<commons-collections4.version>4.1</commons-collections4.version>
+		<modelmapper-spring.version>2.3.0</modelmapper-spring.version>
 	</properties>
 
 	<dependencies>
@@ -73,7 +71,7 @@
 		<dependency>
   			<groupId>org.modelmapper.extensions</groupId>
   			<artifactId>modelmapper-spring</artifactId>
-  			<version>2.3.0</version>
+  			<version>${modelmapper-spring.version}</version>
 		</dependency>
 
 		<!-- Logging -->
@@ -96,13 +94,6 @@
 	<build>
 		<plugins>
 			<plugin>
-            	<artifactId>maven-compiler-plugin</artifactId>
-            	<configuration>
-                	<fork>true</fork>
-                	<executable>${java.exec}</executable>
-            	</configuration>
-        	</plugin>
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
@@ -111,10 +102,8 @@
 	
 	
     <modules>
-    	<module>rest-java-musbands-core</module>
-    	<module>rest-java-musbands-audit</module>
-    	<module>rest-java-musbands-security</module>
-    	<module>rest-java-musbands-musical-genre</module>
+    	<module>common</module>
+    	<module>restapi</module>
     </modules>
 
 </project>
