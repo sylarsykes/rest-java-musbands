@@ -21,9 +21,14 @@
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
-            <url>http://www.apache.org/licenses/</url>
+            <url>https://github.com/sylarsykes/rest-java-musbands/blob/master/LICENSE</url>
         </license>
 	</licenses>
+	<scm>
+        <url>https://github.com/sylarsykes/rest-java-musbands</url>
+        <connection>https://github.com/sylarsykes/rest-java-musbands.git</connection>
+        <developerConnection>ps://github.com/sylarsykes</developerConnection>
+	</scm>
 	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -98,6 +103,22 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<!-- Javadoc -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+            	<aggregate>true</aggregate>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                </execution>
+            </executions>
+		</plugin>
 	</build>
 	
 	

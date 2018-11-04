@@ -1,5 +1,9 @@
 package org.sylrsykssoft.rest.java.musbands.musicalGenre.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+
 import java.util.Optional;
 
 import org.junit.Assert;
@@ -17,11 +21,6 @@ import org.sylrsykssoft.rest.java.musbands.configuration.configuration.Configura
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.RestJavaMusbandsMusicalGenreApplication;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.MusicalGenreResource;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.MusicalGenreResource.MusicalGenreResourceBuilder;
-import org.sylrsykssoft.rest.java.musbands.musicalGenre.exception.MusicalGenreException;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Musical genre service test.
@@ -81,6 +80,18 @@ public class MusicalGenreServiceTest {
 				.description(resourceGet.getDescription() + " El ir.").build());
 		
 		assertThat("Entity id did not match!", resourceUpdated.getID(), is(resourceGet.getID()));
+	}
+	
+	@Test
+	public void testDeleteMusicalGenre() {
+		String name = "Pop punk";
+		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
+		
+		MusicalGenreResource source = optResource.orElseThrow(IllegalStateException::new);
+		
+		assertThat("Entity name did not match!", source.getName(), is(name));
+		
+		musicalGenreService.delete(source);
 	}
 
 }
