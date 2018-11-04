@@ -1,12 +1,17 @@
 package org.sylrsykssoft.rest.java.musbands.musicalGenre.domain;
 
 import java.beans.ConstructorProperties;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.sylrsykssoft.rest.java.musbands.audit.domain.Audit;
 import org.sylrsykssoft.rest.java.musbands.audit.domain.IAuditable;
@@ -47,6 +52,10 @@ public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<Musica
 	
 	@Embedded
 	private Translate translate;
+	
+	@Column(name = "removed_at", nullable = true, insertable = false, updatable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	protected @Nullable Date removedAt;
 
 	/**
 	 * AllArgsContructor
@@ -61,10 +70,11 @@ public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<Musica
 	 */
 	@Builder()
 	@ConstructorProperties({ "id", "name", "description", "audit", "translate"})
-	public MusicalGenre(final Integer id, final String name, final String description, final Audit audit, final Translate translate) {
+	public MusicalGenre(final Integer id, final String name, final String description, final Audit audit, final Translate translate, final Date removedAt) {
 		super(id, name, description);
 		this.audit = audit;
 		this.translate = translate;
+		this.removedAt = removedAt;
 	}
 
 	/**
@@ -120,6 +130,7 @@ public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<Musica
 			super(base);
 			this.audit = base.getAudit();
 			this.translate = base.getTranslate();
+			this.removedAt = base.getRemovedAt();
 		}
 
 	}

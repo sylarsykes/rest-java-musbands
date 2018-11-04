@@ -54,24 +54,6 @@ public class AuditListener {
 			audit.setLastModifiedBy(username);
 		}
 	}
-	
-	/**
-	 * Set audit
-	 * 
-	 * @param auditableObject
-	 */
-	@PreRemove
-	void onPreDelete(final Object auditableObject) {
-		if (auditableObject instanceof IAuditable) {
-			Audit audit = getAudit((IAuditable) auditableObject);
-			
-			Date date = new Date();
-			audit.setDeletedAt(date);
-			
-			String username = getUsername();
-			audit.setLastModifiedBy(username);
-		}
-	}
 
 	/**
 	 * Getter username

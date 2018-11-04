@@ -32,7 +32,7 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.Musi
 @SpringBootTest(classes = { RestJavaMusbandsMusicalGenreApplication.class })
 @ContextConfiguration(classes = { 
 		ConfigurationConfiguration.class }, loader = AnnotationConfigContextLoader.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MusicalGenreServiceTest {
 
 	@Autowired

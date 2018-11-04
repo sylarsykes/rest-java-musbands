@@ -55,10 +55,6 @@ public class Audit {
 	@LastModifiedBy
 	protected @Nullable String lastModifiedBy;
 	
-	@Column(name = "deleted_at", nullable = true, insertable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	protected @Nullable Date deletedAt;
-
 	/**
 	 * Builder.
 	 * 
@@ -101,11 +97,10 @@ public class Audit {
 		 *            BaseEntity object.
 		 */
 		public AuditBuilder(final Audit audit) {
-			this.createdAt = audit.getCreatedAt();
-			this.updatedAt = audit.getUpdatedAt();
-			this.deletedAt = audit.getDeletedAt();
-			this.createdBy = audit.getCreatedBy();
-			this.lastModifiedBy = audit.getLastModifiedBy();
+			this.createdAt = audit.createdAt;
+			this.updatedAt = audit.updatedAt;
+			this.createdBy = audit.createdBy;
+			this.lastModifiedBy = audit.lastModifiedBy;
 		}
 	}
 }

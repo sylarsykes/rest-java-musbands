@@ -40,13 +40,12 @@ public class BuilderTest {
 	public void testBaseBuilder() {
 		Date createdAt = new Date();
 		Date updatedAt = new Date();
-		Date deletedAt = new Date();
 
 		BaseBuilder builder = new BaseBuilder();
 		
 		Assert.assertNotNull(builder);
 		
-		Base domain = builder.createdAt(createdAt).updatedAt(updatedAt).deletedAt(deletedAt).build();
+		Base domain = builder.createdAt(createdAt).updatedAt(updatedAt).build();
 		
 		Assert.assertNotNull(domain);
 	}
@@ -55,7 +54,6 @@ public class BuilderTest {
 	public void testBaseAdminBuilder() {
 		Date createdAt = new Date();
 		Date updatedAt = new Date();
-		Date deletedAt = new Date();
 		Integer id = NumberUtils.INTEGER_ONE;
 		String name = "aaa";
 		String description = "aaaabbbbcccaaccvvdd";

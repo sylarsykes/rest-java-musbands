@@ -46,10 +46,6 @@ public class Base {
 	@Temporal(TemporalType.TIMESTAMP)
 	protected @Nullable Date updatedAt;
 
-	@Column(name = "deleted_at", nullable = true, insertable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	protected @Nullable Date deletedAt;
-
 	/**
 	 * Builder.
 	 * 
@@ -93,7 +89,6 @@ public class Base {
 		public BaseBuilder(final Base base) {
 			this.createdAt = base.getCreatedAt();
 			this.updatedAt = base.getUpdatedAt();
-			this.deletedAt = base.getDeletedAt();
 		}
 
 	}

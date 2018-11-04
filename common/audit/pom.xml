@@ -20,6 +20,12 @@
 			<artifactId>rest-java-musbands-core-starter</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+		  <groupId>org.yuequan</groupId>
+		  <artifactId>jpa-soft-delete-spring-boot-starter</artifactId>
+		  <version>1.0.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 	
 </project>

@@ -125,17 +125,6 @@ public class BaseAdminAudit extends BaseAdmin implements IAuditable {
 		}
 
 		/**
-		 * Set deletedAt from audit property
-		 * 
-		 * @param deletedAt
-		 * @return BaseAdminBuilder
-		 */
-		public BaseAdminAuditBuilder deletedAt(final Date deletedAt) {
-			this.audit.setDeletedAt(deletedAt);
-			return this;
-		}
-
-		/**
 		 * Set createdBy from audit property
 		 * 
 		 * @param createdBy
@@ -156,6 +145,6 @@ public class BaseAdminAudit extends BaseAdmin implements IAuditable {
 			this.audit.setLastModifiedBy(lastModifiedBy);
 			return this;
 		}
-
+		
 	}
 }

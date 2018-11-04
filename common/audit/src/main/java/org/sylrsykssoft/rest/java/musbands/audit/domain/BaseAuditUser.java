@@ -53,16 +53,18 @@ public class BaseAuditUser implements Persistable<Long>, Auditable<AuditUser, Lo
 	@Column(name = "id", updatable = false, nullable = false)
 	protected Long id;
 	
-	@ManyToOne //
+	@ManyToOne
 	protected @Nullable AuditUser createdBy;
 
-	@Temporal(TemporalType.TIMESTAMP) //
+	@Column(name = "created_at", nullable = false, insertable = true, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	protected @Nullable Date createdDate;
 
-	@ManyToOne //
+	@ManyToOne
 	protected @Nullable AuditUser lastModifiedBy;
 
-	@Temporal(TemporalType.TIMESTAMP) //
+	@Column(name = "updated_at", nullable = true, insertable = false, updatable = true)
+	@Temporal(TemporalType.TIMESTAMP)
 	protected @Nullable Date lastModifiedDate;
 
 	/**
