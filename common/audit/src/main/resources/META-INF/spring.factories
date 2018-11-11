@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.sylrsykssoft.rest.java.musbands.audit.configuration.BaseConfiguration,\
+org.sylrsykssoft.rest.java.musbands.audit.configuration.AuditConfiguration,\
+org.sylrsykssoft.rest.java.musbands.audit.configuration.DomainConfiguration

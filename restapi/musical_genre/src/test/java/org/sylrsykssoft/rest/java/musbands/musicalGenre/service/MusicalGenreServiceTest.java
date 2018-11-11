@@ -8,10 +8,8 @@ import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,7 +30,7 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.Musi
 @SpringBootTest(classes = { RestJavaMusbandsMusicalGenreApplication.class })
 @ContextConfiguration(classes = { 
 		ConfigurationConfiguration.class }, loader = AnnotationConfigContextLoader.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MusicalGenreServiceTest {
 
 	@Autowired

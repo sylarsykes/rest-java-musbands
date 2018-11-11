@@ -49,9 +49,9 @@ public class BaseAdminResource extends BaseResource {
 	 */
 	@Builder()
 	@ConstructorProperties({ "createdAt", "updatedAt", "deletedAt", "id", "name", "description"})
-	public BaseAdminResource(final Date createdAt, final Date updatedAt, final Date deletedAt, final Integer id,
+	public BaseAdminResource(final Date createdAt, final Date updatedAt, final Date removedAt, final Integer id,
 			final String name, final String description) {
-		super(createdAt, updatedAt, deletedAt);
+		super(createdAt, updatedAt, removedAt);
 		this.ID = id;
 		this.name = name;
 		this.description = description;
