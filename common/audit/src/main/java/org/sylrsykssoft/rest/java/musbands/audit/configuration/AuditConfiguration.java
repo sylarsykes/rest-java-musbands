@@ -20,22 +20,30 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class AuditConfiguration {
 
-    @Bean
-    public AuditorAware<String> auditorAware() {
-        return new SecurityAuditor();
-    }
+	@Bean
+	public AuditorAware<String> auditorAware() {
+		return new SecurityAuditor();
+	}
 
-    @Bean
-    public AuditingEntityListener createAuditingListener() {
-        return new AuditingEntityListener();
-    }
+	@Bean
+	public AuditingEntityListener createAuditingListener() {
+		return new AuditingEntityListener();
+	}
 
-    public static class SecurityAuditor implements AuditorAware<String> {
-        @Override
-        public Optional<String> getCurrentAuditor() {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String username = auth.getName();
-            return Optional.of(username);
-        }
-    }	
+	/**
+	 * Get current auditor.
+	 * 
+	 * @author juan.gonzalez.fernandez.jgf
+	 *
+	 */
+	public static class SecurityAuditor implements AuditorAware<String> {
+		@Override
+		public Optional<String> getCurrentAuditor() {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Optional<Authentication> username = Optional.ofNullable(auth);
+			return Optional.of(username
+					.flatMap((input) -> (input == null) ? Optional.of("adminTest") : Optional.of(input.getName()))
+					.orElseGet(() -> "adminTest"));
+		}
+	}
 }

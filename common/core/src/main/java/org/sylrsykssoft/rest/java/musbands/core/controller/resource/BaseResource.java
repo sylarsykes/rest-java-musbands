@@ -38,7 +38,7 @@ public class BaseResource extends ResourceSupport {
 	protected Date updatedAt;
 	
 	@JsonIgnore()
-	protected Date deletedAt;
+	protected Date removedAt;
 
 	/**
 	 * Builder.
@@ -85,6 +85,7 @@ public class BaseResource extends ResourceSupport {
 		public BaseResourceBuilder(final BaseResource base) {
 			this.createdAt = base.getCreatedAt();
 			this.updatedAt = base.getUpdatedAt();
+			this.removedAt = base.getRemovedAt();
 		}
 
 	}

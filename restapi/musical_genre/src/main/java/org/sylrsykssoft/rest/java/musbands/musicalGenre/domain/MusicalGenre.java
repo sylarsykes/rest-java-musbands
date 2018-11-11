@@ -3,20 +3,13 @@ package org.sylrsykssoft.rest.java.musbands.musicalGenre.domain;
 import java.beans.ConstructorProperties;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-import org.sylrsykssoft.rest.java.musbands.audit.domain.Audit;
-import org.sylrsykssoft.rest.java.musbands.audit.domain.IAuditable;
-import org.sylrsykssoft.rest.java.musbands.audit.domain.listener.AuditListener;
-import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.BaseAdminAudit;
 import org.sylrsykssoft.rest.java.musbands.core.domain.FactoryAdminDomain;
 import org.sylrsykssoft.rest.java.musbands.core.domain.ITranslatable;
 import org.sylrsykssoft.rest.java.musbands.core.domain.Translate;
@@ -44,19 +37,12 @@ import lombok.Setter;
 @Setter()
 @Getter()
 @EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
-@EntityListeners({AuditListener.class, TranslateListener.class})
-public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<MusicalGenre>, IAuditable, ITranslatable {
+@EntityListeners({TranslateListener.class})
+public class MusicalGenre extends BaseAdminAudit implements FactoryAdminDomain<MusicalGenre>, ITranslatable {
 
-	@Embedded
-	private Audit audit;
-	
 	@Embedded
 	private Translate translate;
 	
-	@Column(name = "removed_at", nullable = true, insertable = false, updatable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	protected @Nullable Date removedAt;
-
 	/**
 	 * AllArgsContructor
 	 * 
@@ -69,12 +55,11 @@ public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<Musica
 	 * @param deletedAt
 	 */
 	@Builder()
-	@ConstructorProperties({ "id", "name", "description", "audit", "translate"})
-	public MusicalGenre(final Integer id, final String name, final String description, final Audit audit, final Translate translate, final Date removedAt) {
-		super(id, name, description);
-		this.audit = audit;
+	@ConstructorProperties({ "id", "name", "description", "createdAt", "createdBy", "updatedAt", "lastModifiedBy", "removedAt", "translate"})
+	public MusicalGenre(final Integer id, final String name, final String description, final Date createdAt,
+			final String createdBy, final Date updatedAt, final String lastModifiedBy, final Date removedAt, final Translate translate) {
+		super(id, name, description, createdAt, createdBy, updatedAt, lastModifiedBy, removedAt);
 		this.translate = translate;
-		this.removedAt = removedAt;
 	}
 
 	/**
@@ -113,7 +98,7 @@ public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<Musica
 	 *
 	 */
 	@Component()
-	public static class MusicalGenreBuilder extends BaseAdminBuilder {
+	public static class MusicalGenreBuilder extends BaseAdminAuditBuilder {
 
 		/**
 		 * Default constructor.
@@ -128,9 +113,7 @@ public class MusicalGenre extends BaseAdmin implements FactoryAdminDomain<Musica
 		 */
 		public MusicalGenreBuilder(final MusicalGenre base) {
 			super(base);
-			this.audit = base.getAudit();
 			this.translate = base.getTranslate();
-			this.removedAt = base.getRemovedAt();
 		}
 
 	}

@@ -3,12 +3,20 @@ package org.sylrsykssoft.rest.java.musbands.audit.domain;
 import java.beans.ConstructorProperties;
 import java.util.Date;
 
-import javax.persistence.Embedded;
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-import org.sylrsykssoft.rest.java.musbands.audit.domain.listener.AuditListener;
+import org.sylrsykssoft.rest.java.musbands.audit.domain.listener.BaseAdminAuditListener;
 import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
 
 import lombok.AccessLevel;
@@ -34,12 +42,30 @@ import lombok.Setter;
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = false, doNotUseGetters = true)
-@EntityListeners(AuditListener.class)
-public class BaseAdminAudit extends BaseAdmin implements IAuditable {
+//@EntityListeners({AuditListener.class, BaseAdminAuditListener.class})
+@EntityListeners({AuditingEntityListener.class, BaseAdminAuditListener.class})
+public class BaseAdminAudit extends BaseAdmin {
 
-	@Embedded
-	protected Audit audit;
-	
+	@Column(name = "created_at", nullable = false, insertable = true, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	protected Date createdAt;
+
+	@CreatedBy
+	protected @Nullable String createdBy;
+
+	@Column(name = "updated_at", nullable = true, insertable = false, updatable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	protected @Nullable Date updatedAt;
+
+	@LastModifiedBy
+	protected @Nullable String lastModifiedBy;
+
+	@Column(name = "removed_at", nullable = true, insertable = false, updatable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	protected @Nullable Date removedAt;
+
 	/**
 	 * AllArgsConstructor
 	 * 
@@ -50,12 +76,16 @@ public class BaseAdminAudit extends BaseAdmin implements IAuditable {
 	 * @param audit
 	 */
 	@Builder()
-	@ConstructorProperties({ "id", "name", "description", "audit"})
-	public BaseAdminAudit(final Integer id, final String name, final String description, final Audit audit) {
+	@ConstructorProperties({ "id", "name", "description", "createdAt", "createdBy", "updatedAt", "lastModifiedBy", "removedAt" })
+	public BaseAdminAudit(final Integer id, final String name, final String description, final Date createdAt,
+			final String createdBy, final Date updatedAt, final String lastModifiedBy, final Date removedAt) {
 		super(id, name, description);
-		this.audit = audit;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.createdBy = createdBy;
+		this.lastModifiedBy = lastModifiedBy;
+		this.removedAt = removedAt;
 	}
-
 
 	/**
 	 * Builder.
@@ -84,7 +114,7 @@ public class BaseAdminAudit extends BaseAdmin implements IAuditable {
 	 *
 	 */
 	@Component()
-	public static class BaseAdminAuditBuilder extends BaseAdminBuilder  {
+	public static class BaseAdminAuditBuilder extends BaseAdminBuilder {
 
 		/**
 		 * Default constructor.
@@ -99,52 +129,12 @@ public class BaseAdminAudit extends BaseAdmin implements IAuditable {
 		 */
 		public BaseAdminAuditBuilder(final BaseAdminAudit base) {
 			super(base);
-			this.audit = base.getAudit();
+			this.createdAt = base.createdAt;
+			this.updatedAt = base.updatedAt;
+			this.createdBy = base.createdBy;
+			this.lastModifiedBy = base.lastModifiedBy;
+			this.removedAt = base.getRemovedAt();
 		}
 
-		/**
-		 * Set createdAt from audit property
-		 * 
-		 * @param createdAt
-		 * @return BaseAdminBuilder
-		 */
-		public BaseAdminAuditBuilder createdAt(final Date createdAt) {
-			this.audit.setCreatedAt(createdAt);
-			return this;
-		}
-
-		/**
-		 * Set updatedAt from audit property
-		 * 
-		 * @param updatedAt
-		 * @return BaseAdminBuilder
-		 */
-		public BaseAdminAuditBuilder updatedAt(final Date updatedAt) {
-			this.audit.setUpdatedAt(updatedAt);
-			return this;
-		}
-
-		/**
-		 * Set createdBy from audit property
-		 * 
-		 * @param createdBy
-		 * @return BaseAdminBuilder
-		 */
-		public BaseAdminBuilder createdBy(final String createdBy) {
-			this.audit.setCreatedBy(createdBy);
-			return this;
-		}
-
-		/**
-		 * Set lastModifiedBy from audit property
-		 * 
-		 * @param lastModifiedBy
-		 * @return BaseAdminBuilder
-		 */
-		public BaseAdminBuilder lastModifiedBy(final String lastModifiedBy) {
-			this.audit.setLastModifiedBy(lastModifiedBy);
-			return this;
-		}
-		
 	}
 }
