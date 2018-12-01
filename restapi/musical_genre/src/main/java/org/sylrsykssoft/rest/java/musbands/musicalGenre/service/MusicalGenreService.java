@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.rest.java.musbands.core.mapper.BaseAdminModelMapperEntityToResourceFunction;
@@ -27,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  * @param <T> Type class.
  */
 @Service()
-@CacheConfig(cacheNames = {"musicalGenres"})
+@CacheConfig(cacheNames = {"musicalGenres"}, cacheManager = "musicalGenreCacheManager", keyGenerator = "customKeyGenerator")
 @Slf4j()
 public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalGenreResource> {
 
@@ -40,7 +39,6 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	@Autowired
 	private MusicalGenreModelMapperResourceToEntityFunction baseAdminModelMapperResourceToEntityFunction;
 
-	
 	/**
 	 * Find musical genre by name
 	 * 
@@ -48,7 +46,6 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 */
 	@Override()
 	@Cacheable("musicalGenres")
-	@CacheEvict(value = "musicalGenres", allEntries = true)
 	public Optional<MusicalGenreResource> findByName(final String name) {
 		LOGGER.info("MusicalGenreService:findByName Find by name {}.", name);
 		return super.findByName(name);
@@ -62,7 +59,6 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 */
 	@Override
 	@Cacheable("musicalGenres")
-	@CacheEvict(value = "musicalGenres", allEntries = true)
 	public List<MusicalGenreResource> findAll() {
 		LOGGER.info("MusicalGenreService:findAll Find all.");
 		return super.findAll();
