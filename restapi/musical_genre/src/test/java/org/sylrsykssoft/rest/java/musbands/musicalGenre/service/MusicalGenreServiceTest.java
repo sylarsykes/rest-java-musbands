@@ -28,9 +28,7 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.Musi
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { RestJavaMusbandsMusicalGenreApplication.class })
-@ContextConfiguration(classes = { 
-		ConfigurationConfiguration.class }, loader = AnnotationConfigContextLoader.class)
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ContextConfiguration(classes = { ConfigurationConfiguration.class }, loader = AnnotationConfigContextLoader.class)
 public class MusicalGenreServiceTest {
 
 	@Autowired
@@ -65,31 +63,31 @@ public class MusicalGenreServiceTest {
 		Assert.assertNotNull(musicalGenres);
 	}
 	
-	@Test
-	public void testUpdateMusicalGenre() {
-		String name = "Pop punk";
-		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
-		
-		MusicalGenreResource resourceGet = optResource.orElseThrow(IllegalStateException::new);
-		
-		assertThat("Entity name did not match!", resourceGet.getName(), is(name));
-		
-		MusicalGenreResource resourceUpdated = musicalGenreService.save(resourceBuilder.id(resourceGet.getID()).name(resourceGet.getName())
-				.description(resourceGet.getDescription() + " El ir.").build());
-		
-		assertThat("Entity id did not match!", resourceUpdated.getID(), is(resourceGet.getID()));
-	}
-	
-	@Test
-	public void testDeleteMusicalGenre() {
-		String name = "Pop punk";
-		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
-		
-		MusicalGenreResource source = optResource.orElseThrow(IllegalStateException::new);
-		
-		assertThat("Entity name did not match!", source.getName(), is(name));
-		
-		musicalGenreService.delete(source);
-	}
+//	@Test
+//	public void testUpdateMusicalGenre() {
+//		String name = "Pop punk";
+//		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
+//		
+//		MusicalGenreResource resourceGet = optResource.orElseThrow(IllegalStateException::new);
+//		
+//		assertThat("Entity name did not match!", resourceGet.getName(), is(name));
+//		
+//		MusicalGenreResource resourceUpdated = musicalGenreService.save(resourceBuilder.id(resourceGet.getID()).name(resourceGet.getName())
+//				.description(resourceGet.getDescription() + " El ir.").build());
+//		
+//		assertThat("Entity id did not match!", resourceUpdated.getID(), is(resourceGet.getID()));
+//	}
+//	
+//	@Test
+//	public void testDeleteMusicalGenre() {
+//		String name = "Pop punk";
+//		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
+//		
+//		MusicalGenreResource source = optResource.orElseThrow(IllegalStateException::new);
+//		
+//		assertThat("Entity name did not match!", source.getName(), is(name));
+//		
+//		musicalGenreService.delete(source);
+//	}
 
 }

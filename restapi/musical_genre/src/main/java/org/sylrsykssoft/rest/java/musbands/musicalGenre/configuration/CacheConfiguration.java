@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableCaching
 public class CacheConfiguration {
 
-	@Bean
+	@Bean("musicalGenreCacheManager")
 	public CacheManager cacheManager() {
 		final SimpleCacheManager cacheManager = new SimpleCacheManager();
 		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("musicalGenres")));
