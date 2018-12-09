@@ -12,7 +12,7 @@ import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityExceptio
 import org.sylrsykssoft.rest.java.musbands.core.mapper.AdminMapperFunction;
 import org.sylrsykssoft.rest.java.musbands.core.repository.BaseAdminRepository;
 
-import lombok.extern.slf4j.Slf4j;
+import com.jcabi.aspects.Loggable;
 
 /**
  * BaseAdminService service.
@@ -21,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @param <T> Type class.
  */
-@Slf4j()
 public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminResource> implements AdminService<T, R, Integer>, AdminMapperFunction<T, R> {
 
 	@Autowired()
@@ -31,12 +30,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(Loggable.INFO)
 	public Optional<R> findByName(final String name) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:findByName Find by name {}.", name);
-
 		final Optional<T> source = superAdminRepository.findByName(name);
-
-		LOGGER.info("Exit -> {} ", source);
 		return Optional.of(source.flatMap(
 				(input) -> (input == null) ? Optional.empty() : Optional.of(getMapperEntityToResource().apply(input)))
 				.orElseThrow(NotFoundEntityException::new));
@@ -46,13 +42,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(Loggable.INFO)
 	public Optional<R> findById(Integer id) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:findOne Find one by id {}.", id);
-
 		final Optional<T> source = superAdminRepository.findById(id);
-
-		LOGGER.info("Exit -> {} ", source);
-		
 		return Optional.of(source.flatMap(
 				(input) -> (input == null) ? Optional.empty() : Optional.of(getMapperEntityToResource().apply(input)))
 				.orElseThrow(NotFoundEntityException::new));
@@ -62,11 +54,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override
+	@Loggable(Loggable.INFO)
 	public R getOne(Integer id) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:findOne Find one by id {}.", id);
-		
 		final T source = superAdminRepository.getOne(id);
-		
 		return getMapperEntityToResource().apply(source);
 	}
 
@@ -74,13 +64,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override
+	@Loggable(value = Loggable.DEBUG)
 	public List<R> findAll() {
-		LOGGER.info("BaseAdminService:findAll Find all.");
-
-		List<T> sources = superAdminRepository.findAll();
-
-		LOGGER.info("Exit -> {} ", sources);
-
+		final List<T> sources = superAdminRepository.findAll();
 		return sources.stream().map(getMapperEntityToResource()::apply).collect(Collectors.toList());
 	}
 
@@ -88,12 +74,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(Loggable.INFO)
 	public List<R> findAllById(Iterable<Integer> ids) {
-		LOGGER.info("BaseAdminService:findAll Find all by ids {}.", ids);
-
-		List<T> sources = superAdminRepository.findAllById(ids);
-
-		LOGGER.info("Exit -> {} ", sources);
+		final List<T> sources = superAdminRepository.findAllById(ids);
 		return sources.stream().map(getMapperEntityToResource()::apply).collect(Collectors.toList());
 	}
 
@@ -101,22 +84,17 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(Loggable.INFO)
 	public long count() {
-		LOGGER.info("BaseAdminService:count Count.");
-		
-		long c = superAdminRepository.count();
-		
-		LOGGER.info("Exit -> {} ", c);
-		return c;
+		return superAdminRepository.count();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(Loggable.INFO)
 	public boolean existsById(Integer id) {
-		LOGGER.info("BaseAdminService:exists Exists entity by id {}.", id);
-		
 		return superAdminRepository.existsById(id);
 	}
 
@@ -124,16 +102,13 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public R save(final R entity) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:save Save entity {}.", entity);
-		
 		if (entity.getID() != null && !existsById(entity.getID())) {
 			throw new NotFoundEntityException();
 		}
 		
-		T source = superAdminRepository.save(getMapperResourceToEntity().apply(entity));
-		
-		LOGGER.info("Exit -> {} ", source);
+		final T source = superAdminRepository.save(getMapperResourceToEntity().apply(entity));
 		return getMapperEntityToResource().apply(source);
 	}
 
@@ -141,14 +116,11 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public List<R> saveAll(final Iterable<R> sources) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:saveAll Save entities {}.", sources);
-		
-		Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
+		final Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
 				.map(getMapperResourceToEntity()::apply)
 				.collect(Collectors.toList());
-		
-		LOGGER.info("Exit -> {} ", entities);
 		
 		return StreamSupport.stream(entities.spliterator(), false)
 				.map(getMapperEntityToResource()::apply)
@@ -159,8 +131,8 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public void deleteById(Integer id) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:delete Delete entity by id {}.", id);
 		superAdminRepository.deleteById(id);
 	}
 
@@ -168,14 +140,13 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public void delete(R source) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:delete Delete by entity {}.", source);
-		
 		if (source.getID() != null && !existsById(source.getID())) {
 			throw new NotFoundEntityException();
 		}
 		
-		T entity = getMapperResourceToEntity().apply(source);
+		final T entity = getMapperResourceToEntity().apply(source);
 		superAdminRepository.delete(entity);
 	}
 
@@ -183,10 +154,9 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public void deleteAll(Iterable<? extends R> sources) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminService:delete Delete entities by list {}.", sources);
-		
-		Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
+		final Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
 				.map(getMapperResourceToEntity()::apply)
 				.collect(Collectors.toList());
 		
@@ -197,8 +167,8 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
+	@Loggable(Loggable.INFO)
 	public void deleteAll() {
-		LOGGER.info("BaseAdminService:deleteAll Delete all entities.");
 		superAdminRepository.deleteAll();
 	}
 

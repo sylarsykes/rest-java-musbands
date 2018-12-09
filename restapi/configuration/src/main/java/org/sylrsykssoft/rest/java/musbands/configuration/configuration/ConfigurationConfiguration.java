@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
  *
  */
 @Configuration
-@PropertySource("classpath:database.properties")
+@PropertySource({"classpath:application.properties", "classpath:logging.properties", "classpath:database.properties"})
 @EnableConfigurationProperties
 @EnableAutoConfiguration
 public class ConfigurationConfiguration {

@@ -104,6 +104,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.sylrsykssoft</groupId>
+			<artifactId>rest-java-musbands-aspects-starter</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 	<build>

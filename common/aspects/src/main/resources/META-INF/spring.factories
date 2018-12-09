@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.sylrsykssoft.rest.java.musbands.aspects.configuration.BaseConfiguration

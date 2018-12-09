@@ -14,9 +14,8 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.Musi
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.domain.MusicalGenre;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.mapper.MusicalGenreModelMapperEntityToResourceFunction;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.mapper.MusicalGenreModelMapperResourceToEntityFunction;
-import org.sylrsykssoft.rest.java.musbands.musicalGenre.repository.MusicalGenreRepository;
 
-import lombok.extern.slf4j.Slf4j;
+import com.jcabi.aspects.Loggable;
 
 /**
  * MusicalGenreService service.
@@ -27,12 +26,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service()
 @CacheConfig(cacheNames = {"musicalGenres"}, cacheManager = "musicalGenreCacheManager", keyGenerator = "customKeyGenerator")
-@Slf4j()
 public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalGenreResource> {
 
-	@Autowired()
-	private MusicalGenreRepository adminRepository;
-	
 	@Autowired
 	private MusicalGenreModelMapperEntityToResourceFunction baseAdminModelMapperEntityToResourceFunction;
 	
@@ -46,8 +41,8 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 */
 	@Override()
 	@Cacheable("musicalGenres")
+	@Loggable(Loggable.INFO)
 	public Optional<MusicalGenreResource> findByName(final String name) {
-		LOGGER.info("MusicalGenreService:findByName Find by name {}.", name);
 		return super.findByName(name);
 	}
 
@@ -59,8 +54,8 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 */
 	@Override
 	@Cacheable("musicalGenres")
+	@Loggable(Loggable.INFO)
 	public List<MusicalGenreResource> findAll() {
-		LOGGER.info("MusicalGenreService:findAll Find all.");
 		return super.findAll();
 	}
 
