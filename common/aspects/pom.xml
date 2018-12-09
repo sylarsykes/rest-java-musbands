@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+	  <groupId>org.sylrsykssoft</groupId>
+	  <artifactId>rest-java-musbands-common</artifactId>
+	  <version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>rest-java-musbands-aspects-starter</artifactId>
+	<packaging>jar</packaging>
+
+	<name>rest-java-musbands-aspects-starter</name>
+	<description>Common aspects for Java Musbands Repository</description> 
+	<url>https://github.com/sylarsykes/rest-java-musbands/blob/master/common/aspects</url>
+	
+	<dependencies>
+		<dependency>
+		  <groupId>com.jcabi</groupId>
+		  <artifactId>jcabi-aspects</artifactId>
+		  <version>0.22.6</version>
+		</dependency>	
+		
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+	    <!-- To define the plugin version in your parent POM -->
+	    <pluginManagement>
+	      <plugins>
+	        <plugin>
+	          <groupId>org.codehaus.mojo</groupId>
+	          <artifactId>aspectj-maven-plugin</artifactId>
+	        </plugin>
+	      </plugins>
+	    </pluginManagement>
+	    <!-- To use the plugin goals in your POM or parent POM -->
+	    <plugins>
+	      <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>aspectj-maven-plugin</artifactId>
+	      </plugin>
+	    </plugins>
+  	</build>
+  
+	<!-- To use the report goals in your POM or parent POM -->
+	<reporting>
+	  <plugins>
+	    <plugin>
+	      <groupId>org.codehaus.mojo</groupId>
+	      <artifactId>aspectj-maven-plugin</artifactId>
+	    </plugin>
+	  </plugins>
+	</reporting>
+</project>

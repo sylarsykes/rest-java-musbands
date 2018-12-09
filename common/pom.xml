@@ -18,6 +18,7 @@
 	<modules>
     	<module>core</module>
     	<module>audit</module>
+    	<module>aspects</module>
     	<module>security</module>
     </modules>
 </project>
