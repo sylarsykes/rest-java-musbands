@@ -16,19 +16,12 @@
 	
 	<dependencies>
 		<dependency>
-		  <groupId>com.jcabi</groupId>
-		  <artifactId>jcabi-aspects</artifactId>
-		  <version>0.22.6</version>
-		</dependency>	
-		
-		<dependency>
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjrt</artifactId>
 		</dependency>
 	</dependencies>
 	
 	<build>
-	    <!-- To define the plugin version in your parent POM -->
 	    <pluginManagement>
 	      <plugins>
 	        <plugin>
@@ -37,7 +30,6 @@
 	        </plugin>
 	      </plugins>
 	    </pluginManagement>
-	    <!-- To use the plugin goals in your POM or parent POM -->
 	    <plugins>
 	      <plugin>
 	        <groupId>org.codehaus.mojo</groupId>
