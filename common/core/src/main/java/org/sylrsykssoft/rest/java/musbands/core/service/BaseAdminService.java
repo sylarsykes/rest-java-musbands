@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.sylrsykssoft.rest.java.musbands.aspects.logger.annotation.Logging;
 import org.sylrsykssoft.rest.java.musbands.core.controller.resource.BaseAdminResource;
 import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
 import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
@@ -21,6 +22,7 @@ import com.jcabi.aspects.Loggable;
  *
  * @param <T> Type class.
  */
+@Logging(Logging.DEBUG)
 public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminResource> implements AdminService<T, R, Integer>, AdminMapperFunction<T, R> {
 
 	@Autowired()
@@ -30,7 +32,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(Loggable.INFO)
 	public Optional<R> findByName(final String name) throws NotFoundEntityException {
 		final Optional<T> source = superAdminRepository.findByName(name);
 		return Optional.of(source.flatMap(
@@ -42,7 +43,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(Loggable.INFO)
 	public Optional<R> findById(Integer id) throws NotFoundEntityException {
 		final Optional<T> source = superAdminRepository.findById(id);
 		return Optional.of(source.flatMap(
@@ -54,7 +54,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Loggable(Loggable.INFO)
 	public R getOne(Integer id) throws NotFoundEntityException {
 		final T source = superAdminRepository.getOne(id);
 		return getMapperEntityToResource().apply(source);
@@ -64,7 +63,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Loggable(value = Loggable.DEBUG)
 	public List<R> findAll() {
 		final List<T> sources = superAdminRepository.findAll();
 		return sources.stream().map(getMapperEntityToResource()::apply).collect(Collectors.toList());
@@ -74,7 +72,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(Loggable.INFO)
 	public List<R> findAllById(Iterable<Integer> ids) {
 		final List<T> sources = superAdminRepository.findAllById(ids);
 		return sources.stream().map(getMapperEntityToResource()::apply).collect(Collectors.toList());
@@ -84,7 +81,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(Loggable.INFO)
 	public long count() {
 		return superAdminRepository.count();
 	}
@@ -93,7 +89,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(Loggable.INFO)
 	public boolean existsById(Integer id) {
 		return superAdminRepository.existsById(id);
 	}
@@ -102,7 +97,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public R save(final R entity) throws NotFoundEntityException {
 		if (entity.getID() != null && !existsById(entity.getID())) {
 			throw new NotFoundEntityException();
@@ -131,7 +125,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public void deleteById(Integer id) throws NotFoundEntityException {
 		superAdminRepository.deleteById(id);
 	}
@@ -140,7 +133,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public void delete(R source) throws NotFoundEntityException {
 		if (source.getID() != null && !existsById(source.getID())) {
 			throw new NotFoundEntityException();
@@ -154,7 +146,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public void deleteAll(Iterable<? extends R> sources) throws NotFoundEntityException {
 		final Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
 				.map(getMapperResourceToEntity()::apply)
@@ -167,7 +158,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(Loggable.INFO)
 	public void deleteAll() {
 		superAdminRepository.deleteAll();
 	}

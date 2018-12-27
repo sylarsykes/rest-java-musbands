@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.sylrsykssoft.rest.java.musbands.aspects.logger.annotation.Logging;
 import org.sylrsykssoft.rest.java.musbands.core.mapper.BaseAdminModelMapperEntityToResourceFunction;
 import org.sylrsykssoft.rest.java.musbands.core.mapper.BaseAdminModelMapperResourceToEntityFunction;
 import org.sylrsykssoft.rest.java.musbands.core.service.BaseAdminService;
@@ -14,8 +15,6 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.Musi
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.domain.MusicalGenre;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.mapper.MusicalGenreModelMapperEntityToResourceFunction;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.mapper.MusicalGenreModelMapperResourceToEntityFunction;
-
-import com.jcabi.aspects.Loggable;
 
 /**
  * MusicalGenreService service.
@@ -26,6 +25,7 @@ import com.jcabi.aspects.Loggable;
  */
 @Service()
 @CacheConfig(cacheNames = {"musicalGenres"}, cacheManager = "musicalGenreCacheManager", keyGenerator = "customKeyGenerator")
+@Logging(Logging.DEBUG)
 public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalGenreResource> {
 
 	@Autowired
@@ -41,7 +41,6 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 */
 	@Override()
 	@Cacheable("musicalGenres")
-	@Loggable(Loggable.INFO)
 	public Optional<MusicalGenreResource> findByName(final String name) {
 		return super.findByName(name);
 	}
@@ -54,7 +53,6 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 */
 	@Override
 	@Cacheable("musicalGenres")
-	@Loggable(Loggable.INFO)
 	public List<MusicalGenreResource> findAll() {
 		return super.findAll();
 	}
