@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
+import org.sylrsykssoft.rest.java.musbands.aspects.logger.aspect.Loggable;
 import org.sylrsykssoft.rest.java.musbands.aspects.logger.aspect.LoggerAspect;
 
 /**
@@ -16,12 +18,18 @@ import org.sylrsykssoft.rest.java.musbands.aspects.logger.aspect.LoggerAspect;
 @Configuration
 @SpringBootConfiguration
 @EnableAspectJAutoProxy
+@PropertySource({"classpath:logging.properties"})
 @ComponentScan("org.sylrsykssoft.rest.java.musbands.aspects")
 public class BaseConfiguration {
 
-	
+
+	/**
+	 * Logger aspect.
+	 * 
+	 * @return
+	 */
 	@Bean
-	public LoggerAspect loggerAspect() {
+	public Loggable loggerAspect() {
 		return new LoggerAspect();
 	}
 }

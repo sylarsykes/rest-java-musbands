@@ -49,5 +49,4 @@ public @interface Logging {
      * Level of logging.
      */
     int value() default Logging.INFO;
-
 }

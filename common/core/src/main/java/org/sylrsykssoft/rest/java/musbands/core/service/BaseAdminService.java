@@ -13,8 +13,6 @@ import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityExceptio
 import org.sylrsykssoft.rest.java.musbands.core.mapper.AdminMapperFunction;
 import org.sylrsykssoft.rest.java.musbands.core.repository.BaseAdminRepository;
 
-import com.jcabi.aspects.Loggable;
-
 /**
  * BaseAdminService service.
  * 
@@ -110,7 +108,6 @@ public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminR
 	 * {@inheritDoc}
 	 */
 	@Override()
-	@Loggable(value = Loggable.INFO, ignore = NotFoundEntityException.class)
 	public List<R> saveAll(final Iterable<R> sources) throws NotFoundEntityException {
 		final Iterable<T> entities = StreamSupport.stream(sources.spliterator(), false)
 				.map(getMapperResourceToEntity()::apply)
