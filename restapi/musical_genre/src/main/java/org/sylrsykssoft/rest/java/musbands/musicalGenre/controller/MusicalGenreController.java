@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.sylrsykssoft.rest.java.musbands.aspects.logger.annotation.Logging;
 import org.sylrsykssoft.rest.java.musbands.core.controller.BaseAdminController;
 import org.sylrsykssoft.rest.java.musbands.core.exception.AppException;
 import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
@@ -22,8 +23,6 @@ import org.sylrsykssoft.rest.java.musbands.musicalGenre.controller.resource.Musi
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.domain.MusicalGenre;
 import org.sylrsykssoft.rest.java.musbands.musicalGenre.service.MusicalGenreService;
 
-import com.jcabi.aspects.Loggable;
-
 /**
  * Rest Controller for Musical Genre API
  * 
@@ -31,6 +30,7 @@ import com.jcabi.aspects.Loggable;
  *
  */
 @RestController
+@Logging(Logging.INFO)
 public class MusicalGenreController extends BaseAdminController<MusicalGenreResource, MusicalGenre> {
 
 	@Autowired
@@ -44,7 +44,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@GetMapping("/admin/musicalGenres")
 	@ResponseBody
-	@Loggable(Loggable.INFO)
 	public List<MusicalGenreResource> findAll() throws NotFoundEntityException {
 		List<MusicalGenreResource> result = musicalGenreService.findAll();
 		if (result == null) {
@@ -66,7 +65,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@GetMapping(path = "/admin/musicalGenres/{name}")
 	@ResponseBody
-	@Loggable(Loggable.INFO)
 	public Optional<MusicalGenreResource> findByName(@PathVariable final String name) throws NotFoundEntityException {
 		Optional<MusicalGenreResource> result = musicalGenreService.findByName(name);
 		if (result == null) {
@@ -88,7 +86,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@GetMapping("/admin/musicalGenres/{id}")
 	@ResponseBody
-	@Loggable(Loggable.INFO)
 	public Optional<MusicalGenreResource> findOne(@PathVariable final Integer id) throws NotFoundEntityException {
 		final Optional<MusicalGenreResource> entity = musicalGenreService.findById(id);
 
@@ -109,7 +106,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@PutMapping("/admin/musicalGenres")
 	@ResponseBody
-	@Loggable(Loggable.INFO)
 	public MusicalGenreResource create(@Valid @RequestBody final MusicalGenreResource entity) {
 		return musicalGenreService.save(entity);
 	}
@@ -129,7 +125,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@PutMapping("/admin/musicalGenres/{id}")
 	@ResponseBody
-	@Loggable(Loggable.INFO)
 	public MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, final @PathVariable Integer id)
 			throws NotIdMismatchEntityException, NotFoundEntityException {
 
@@ -150,7 +145,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @throws AppException
 	 */
 	@DeleteMapping("/admin/musicalGenres/{id}")
-	@Loggable(Loggable.INFO)
 	public void delete(@PathVariable final Integer id) throws NotFoundEntityException, AppException {
 		try {
 			musicalGenreService.deleteById(id);
