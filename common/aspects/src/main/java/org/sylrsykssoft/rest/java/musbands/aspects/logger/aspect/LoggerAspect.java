@@ -29,7 +29,6 @@ import lombok.NonNull;
  * 
  * @author juan.gonzalez.fernandez.jgf
  *
- * @see https://github.com/harshilsharma63/controller-logger/blob/master/src/test/java/io/github/logger/controller/aspect/TestGenericControllerAspect.java
  */
 @Aspect
 public class LoggerAspect implements Loggable {
@@ -74,7 +73,7 @@ public class LoggerAspect implements Loggable {
 	@Around("methodLoggingNotDisabledPointcut() && methodOrClassLoggingEnabledPointcut()")
 	@Nullable
 	public Object log(final @NonNull ProceedingJoinPoint point) throws Throwable {
-		StopWatch timer = new StopWatch();
+		final StopWatch timer = new StopWatch();
 		Object result = null;
 		Method method = null;
 		Signature signature = null;
@@ -99,18 +98,29 @@ public class LoggerAspect implements Loggable {
 			}
 
 			LoggerHelper.log(LOGGER, level, "#%s(%s): %s in %[msec]s", signature.getName(), point.getArgs(), result, timer.getTime());
-
 		}
 
 		return result;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param joinPoint
+	 * @param t
+	 */
 	@AfterThrowing(pointcut = "methodLoggingNotDisabledPointcut() && methodOrClassLoggingEnabledPointcut()", throwing = "t")
 	public void onException(@NonNull JoinPoint joinPoint, @NonNull Throwable t) {
 		String methodName = joinPoint.getSignature().getName() + "()";
 		LOGGER.info(methodName + " threw exception: [" + t + "]");
 	}
 
+	/**
+	 * LoggerHelper
+	 * 
+	 * @author juan.gonzalez.fernandez.jgf
+	 *
+	 */
 	private final static class LoggerHelper {
 		/**
 		 * Log one line.
