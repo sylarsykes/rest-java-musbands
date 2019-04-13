@@ -1,7 +1,6 @@
 package org.sylrsykssoft.rest.java.musbands.core.mapper;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.function.Function;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.sylrsykssoft.rest.java.musbands.core.domain.BaseEntity;
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-public abstract class BaseEntityModelMapperEntityToResourceFunction<T extends BaseEntity, R extends BaseEntityResource> implements Function<T, R> {
+public abstract class BaseEntityModelMapperEntityToResourceFunction<T extends BaseEntity, R extends BaseEntityResource> implements MapperFunction<T, R> {
 
 	@Autowired
 	protected ModelMapper modelMapper;
