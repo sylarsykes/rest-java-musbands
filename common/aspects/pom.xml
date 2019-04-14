@@ -4,7 +4,7 @@
 	<parent>
 	  <groupId>org.sylrsykssoft</groupId>
 	  <artifactId>rest-java-musbands-common</artifactId>
-	  <version>0.1.0-SNAPSHOT</version>
+	  <version>${rest-java-musbands.version}</version>
 	</parent>
 
 	<artifactId>rest-java-musbands-aspects-starter</artifactId>
@@ -13,6 +13,10 @@
 	<name>rest-java-musbands-aspects-starter</name>
 	<description>Common aspects for Java Musbands Repository</description> 
 	<url>https://github.com/sylarsykes/rest-java-musbands/blob/master/common/aspects</url>
+	
+	<properties>
+		<cglib.version>3.2.10</cglib.version>
+	</properties>
 	
 	<dependencies>
 		<dependency>
@@ -31,7 +35,7 @@
 		<dependency>
     		<groupId>cglib</groupId>
     		<artifactId>cglib</artifactId>
-    		<version>3.2.10</version>
+    		<version>${cglib.version}</version>
 		</dependency>
 		
         <dependency>
