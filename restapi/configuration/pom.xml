@@ -4,8 +4,8 @@
 
 	<parent>
 	  <groupId>org.sylrsykssoft</groupId>
-	  <artifactId>rest-java-musbands-common</artifactId>
-	  <version>0.1.0-SNAPSHOT</version>
+	  <artifactId>rest-java-musbands-restapi</artifactId>
+	  <version>${rest-java-musbands.version}</version>
 	</parent>
 	
 	<artifactId>rest-java-musbands-configuration</artifactId>
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>org.sylrsykssoft</groupId>
 			<artifactId>rest-java-musbands-core-starter</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>${rest-java-musbands.version}</version>
 		</dependency>
 	</dependencies>
 </project>
