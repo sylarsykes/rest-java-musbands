@@ -29,7 +29,7 @@ import lombok.Setter;
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-@Table(name = "musical_genre")
+@Table(schema = "musbands_admin_table", name = "musical_genre")
 @Entity()
 @Data()
 @Builder(toBuilder = true)

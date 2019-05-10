@@ -9,7 +9,7 @@ import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-public interface AdminMapperFunction<T extends BaseAdmin, R extends BaseAdminResource> {
+public interface IAdminMapperFunction<T extends BaseAdmin, R extends BaseAdminResource> {
 
 	/**
 	 * Get concrete entity to resource mapper

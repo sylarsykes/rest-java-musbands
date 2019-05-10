@@ -10,7 +10,7 @@ import org.sylrsykssoft.rest.java.musbands.aspects.logger.annotation.Logging;
 import org.sylrsykssoft.rest.java.musbands.core.controller.resource.BaseAdminResource;
 import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
 import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
-import org.sylrsykssoft.rest.java.musbands.core.mapper.AdminMapperFunction;
+import org.sylrsykssoft.rest.java.musbands.core.mapper.IAdminMapperFunction;
 import org.sylrsykssoft.rest.java.musbands.core.repository.BaseAdminRepository;
 
 /**
@@ -21,7 +21,7 @@ import org.sylrsykssoft.rest.java.musbands.core.repository.BaseAdminRepository;
  * @param <T> Type class.
  */
 @Logging(Logging.DEBUG)
-public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminResource> implements AdminService<T, R, Integer>, AdminMapperFunction<T, R> {
+public abstract class BaseAdminService<T extends BaseAdmin, R extends BaseAdminResource> implements IAdminService<T, R, Integer>, IAdminMapperFunction<T, R> {
 
 	@Autowired()
 	protected BaseAdminRepository<T> superAdminRepository;

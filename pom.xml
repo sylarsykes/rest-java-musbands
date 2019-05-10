@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -12,29 +13,29 @@
 
 	<developers>
 		<developer>
-		    <id>juan.gonzalez.fernandez.jgf</id>
-		    <name>Juan Gonzalez Fernandez</name>
-		    <email>${developer.email}</email>
-		    <url>https://github.com/sylarsykes</url>
+			<id>juan.gonzalez.fernandez.jgf</id>
+			<name>Juan Gonzalez Fernandez</name>
+			<email>${developer.email}</email>
+			<url>https://github.com/sylarsykes</url>
 		</developer>
 	</developers>
-    <licenses>
-        <license>
-            <name>Apache License Version 2.0</name>
-            <url>https://github.com/sylarsykes/rest-java-musbands/blob/master/LICENSE</url>
-        </license>
+	<licenses>
+		<license>
+			<name>Apache License Version 2.0</name>
+			<url>https://github.com/sylarsykes/rest-java-musbands/blob/master/LICENSE</url>
+		</license>
 	</licenses>
 	<scm>
-        <url>https://github.com/sylarsykes/rest-java-musbands</url>
-        <connection>https://github.com/sylarsykes/rest-java-musbands.git</connection>
-        <developerConnection>ps://github.com/sylarsykes</developerConnection>
+		<url>https://github.com/sylarsykes/rest-java-musbands</url>
+		<connection>https://github.com/sylarsykes/rest-java-musbands.git</connection>
+		<developerConnection>ps://github.com/sylarsykes</developerConnection>
 	</scm>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -43,17 +44,17 @@
 		<developer.email>juan.gonzalez.fernandez.jgf@outlook.com</developer.email>
 		<java.version>11</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Libraries -->
 		<slf4j.version>1.7.26</slf4j.version>
-        <log4j.version>1.2.17</log4j.version>
+		<log4j.version>1.2.17</log4j.version>
 		<commons-collections4.version>4.3</commons-collections4.version>
 		<modelmapper-spring.version>2.3.3</modelmapper-spring.version>
 		<javassist.version>3.23.1-GA</javassist.version>
-		
+
 		<jacoco.version>0.8.2</jacoco.version>
 	</properties>
 
@@ -62,22 +63,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-		
-      	<dependency>
-        	<groupId>org.glassfish.jaxb</groupId>
-          	<artifactId>jaxb-runtime</artifactId>
-		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.javassist</groupId>
-    		<artifactId>javassist</artifactId>
-    		<version>${javassist.version}</version>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <scope>test</scope>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>${javassist.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -90,30 +91,30 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-collections4</artifactId>
-		    <version>${commons-collections4.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${commons-collections4.version}</version>
 		</dependency>
 		<dependency>
-  			<groupId>org.modelmapper.extensions</groupId>
-  			<artifactId>modelmapper-spring</artifactId>
-  			<version>${modelmapper-spring.version}</version>
+			<groupId>org.modelmapper.extensions</groupId>
+			<artifactId>modelmapper-spring</artifactId>
+			<version>${modelmapper-spring.version}</version>
 		</dependency>
 
 		<!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -122,199 +123,199 @@
 	</dependencies>
 
 	<build>
-	    <plugins>
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-compiler-plugin</artifactId>
-	            <configuration>
-	                <release>${java.version}</release>
-	            </configuration>
-	            <dependencies>
-	                <dependency>
-	                    <groupId>org.ow2.asm</groupId>
-	                    <artifactId>asm</artifactId>
-	                    <version>6.2</version>
-	                </dependency>
-	            </dependencies>
-	        </plugin>
-	        <plugin>
-	            <artifactId>maven-surefire-plugin</artifactId>
-	            <configuration>
-	                <forkCount>0</forkCount>
-	            </configuration>
-	            <dependencies>
-	                <dependency>
-	                    <groupId>org.ow2.asm</groupId>
-	                    <artifactId>asm</artifactId>
-	                    <version>6.2</version>
-	                </dependency>
-	            </dependencies>
-	        </plugin>
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-dependency-plugin</artifactId>
-	            <executions>
-	                <execution>
-	                    <phase>package</phase>
-	                    <goals>
-	                        <goal>copy-dependencies</goal>
-	                    </goals>
-	                    <configuration>
-	                        <outputDirectory>${project.build.directory}/modules</outputDirectory>
-	                        <includeScope>runtime</includeScope>
-	                        <excludeArtifactIds>spring-boot-devtools</excludeArtifactIds>
-	                    </configuration>
-	                </execution>
-	            </executions>
-	        </plugin>
-	        <plugin>
-	            <artifactId>maven-jar-plugin</artifactId>
-	            <configuration>
-	                <outputDirectory>${project.build.directory}/modules</outputDirectory>
-	            </configuration>
-	        </plugin>
-	      	<plugin>
-		        <groupId>org.springframework.boot</groupId>
-		        <artifactId>spring-boot-maven-plugin</artifactId>
-		        <executions>
-					<execution>
-					  <!-- Spring Boot Actuator displays build-related information
-					    if a META-INF/build-info.properties file is present -->
-					  <goals>
-					  	<goal>build-info</goal>
-					  </goals>
-					  <configuration>
-					    <additionalProperties>
-					      <encoding.source>${project.build.sourceEncoding}</encoding.source>
-					      <encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
-					      <java.source>${maven.compiler.source}</java.source>
-					      <java.target>${maven.compiler.target}</java.target>
-					    </additionalProperties>
-					  </configuration>
-					</execution>
-		        </executions>
-			</plugin>
-			
+		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-			    <artifactId>exec-maven-plugin</artifactId>
-			    <executions>
-			    	<execution>
-			        	<id>module-main-class</id>
-			            <phase>package</phase>
-			            <goals>
-			            	<goal>exec</goal>
-			            </goals>
-			            <configuration>
-			            	<executable>jar</executable>
-			                <arguments>
-			                	<argument>
-			                    	--update
-			                    </argument>
-			                    <argument>
-			                    	--file=${project.build.directory}/modules/${project.build.finalName}.jar
-			                    </argument>
-			                    <argument>
-			                    	--main-class=org.springframework.samples.petclinic.PetClinicApplication
-			                    </argument>
-			                    <argument>
-			                    	--module-version=${project.version}
-			                    </argument>
-			            	</arguments>
-			        	</configuration>
-			    	</execution>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>6.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkCount>0</forkCount>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>6.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/modules</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<excludeArtifactIds>spring-boot-devtools</excludeArtifactIds>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
-			
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${project.build.directory}/modules</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<!-- Spring Boot Actuator displays build-related information if a META-INF/build-info.properties 
+							file is present -->
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+						<configuration>
+							<additionalProperties>
+								<encoding.source>${project.build.sourceEncoding}</encoding.source>
+								<encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
+								<java.source>${maven.compiler.source}</java.source>
+								<java.target>${maven.compiler.target}</java.target>
+							</additionalProperties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>module-main-class</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>jar</executable>
+							<arguments>
+								<argument>
+									--update
+								</argument>
+								<argument>
+									--file=${project.build.directory}/modules/${project.build.finalName}.jar
+								</argument>
+								<argument>
+									--main-class=org.springframework.samples.petclinic.PetClinicApplication
+								</argument>
+								<argument>
+									--module-version=${project.version}
+								</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- Javadoc -->
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-javadoc-plugin</artifactId>
-	            <configuration>
-	            	<aggregate>true</aggregate>
-	            </configuration>
-	            <executions>
-	                <execution>
-	                    <phase>package</phase>
-	                    <goals>
-	                        <goal>jar</goal>
-	                    </goals>
-	                </execution>
-	            </executions>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 
-    <profiles>
-        <profile>
-            <id>docker</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>filter-dockerfile</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>src/main/docker</directory>
-                                            <filtering>true</filtering>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>1.4.0</version>
-                        <configuration>
-                            <contextDirectory>${project.build.directory}</contextDirectory>
-                            <repository>${project.artifactId}</repository>
-                            <tag>latest</tag>
-                            <dockerConfigFile></dockerConfigFile>
-                            <buildArgs>
-                                <JVM_OPTS>-Xmx512m</JVM_OPTS>
-                            </buildArgs>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.codehaus.plexus</groupId>
-                                <artifactId>plexus-archiver</artifactId>
-                                <version>3.4</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>javax.activation</groupId>
-                                <artifactId>javax.activation-api</artifactId>
-                                <version>1.2.0</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <id>build-image</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>filter-dockerfile</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/main/docker</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.spotify</groupId>
+						<artifactId>dockerfile-maven-plugin</artifactId>
+						<version>1.4.0</version>
+						<configuration>
+							<contextDirectory>${project.build.directory}</contextDirectory>
+							<repository>${project.artifactId}</repository>
+							<tag>latest</tag>
+							<dockerConfigFile></dockerConfigFile>
+							<buildArgs>
+								<JVM_OPTS>-Xmx512m</JVM_OPTS>
+							</buildArgs>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.codehaus.plexus</groupId>
+								<artifactId>plexus-archiver</artifactId>
+								<version>3.4</version>
+							</dependency>
+							<dependency>
+								<groupId>javax.activation</groupId>
+								<artifactId>javax.activation-api</artifactId>
+								<version>1.2.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>build-image</id>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
-	
-    <modules>
-    	<module>common</module>
-    	<module>restapi</module>
-    </modules>
+
+	<modules>
+		<module>common</module>
+		<module>restapi</module>
+	</modules>
 
 </project>
