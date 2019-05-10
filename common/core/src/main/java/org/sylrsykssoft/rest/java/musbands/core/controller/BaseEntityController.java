@@ -15,23 +15,27 @@ import org.sylrsykssoft.rest.java.musbands.core.domain.BaseEntity;
 import org.sylrsykssoft.rest.java.musbands.core.exception.AppException;
 import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
 import org.sylrsykssoft.rest.java.musbands.core.exception.NotIdMismatchEntityException;
+import org.sylrsykssoft.rest.java.musbands.core.mapper.BaseEntityModelMapperEntityToResourceFunction;
 import org.sylrsykssoft.rest.java.musbands.core.service.BaseEntityService;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Base controller
+ * Base admin controller
  * 
  * @author juan.gonzalez.fernandez.jgf
  *
  * @param <R> Resource class
- * @param <T> Entity class
+ * @param <T> Admin class
  */
 @Slf4j()
-public class BaseController<R extends BaseEntityResource, T extends BaseEntity> {
+public class BaseEntityController<R extends BaseEntityResource, T extends BaseEntity> {
 
 	@Autowired()
-	protected BaseEntityService<T> service;
+	protected BaseEntityService<T, R> entityService;
+	
+	@Autowired
+	protected BaseEntityModelMapperEntityToResourceFunction<T, R> baseEntityModelMapperEntityToResourceFunction;
 
 	/**
 	 * Find all entries.
@@ -41,10 +45,10 @@ public class BaseController<R extends BaseEntityResource, T extends BaseEntity> 
 	 * @throws NotFoundEntityException
 	 */
 	@GetMapping("")
-	public Iterable<T> findAll() throws NotFoundEntityException {
+	public Iterable<R> findAll() throws NotFoundEntityException {
 		LOGGER.info("BaseController:findAll Finding all entries");
 
-		final Iterable<T> entities = service.findAll();
+		final Iterable<R> entities = entityService.findAll();
 		if (entities == null) {
 			throw new NotFoundEntityException();
 		}
@@ -65,9 +69,9 @@ public class BaseController<R extends BaseEntityResource, T extends BaseEntity> 
 	 * @throws NotFoundEntityException
 	 */
 	@GetMapping("/{id}")
-	public Optional<T> findOne(@PathVariable final Long id) throws NotFoundEntityException {
+	public Optional<R> findOne(@PathVariable final Long id) throws NotFoundEntityException {
 		LOGGER.info("BaseController:findOne Find entry with id {}", id);
-		final Optional<T> entity = service.findById(id);
+		final Optional<R> entity = entityService.findById(id);
 
 		if (entity == null) {
 			throw new NotFoundEntityException();
@@ -87,10 +91,10 @@ public class BaseController<R extends BaseEntityResource, T extends BaseEntity> 
 	 */
 	@PutMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public T create(@RequestBody final T entity) {
+	public R create(@RequestBody final R entity) {
 		LOGGER.info("BaseController:create Creating a new todo entry by using information: {}", entity);
 
-		final T created = service.save(entity);
+		final R created = entityService.save(entity);
 
 		LOGGER.info("BaseController:create Created a new todo entry: {}", created);
 
@@ -111,20 +115,20 @@ public class BaseController<R extends BaseEntityResource, T extends BaseEntity> 
 	 * @throws NotFoundEntityException
 	 */
 	@PutMapping("/{id}")
-	public T update(@RequestBody final T entity, @PathVariable final Long id)
+	public R update(@RequestBody final R entity, @PathVariable final Long id)
 			throws NotIdMismatchEntityException, NotFoundEntityException {
 		LOGGER.info("BaseController:update Updating a entry with id: {}", id);
 
-		if (entity.getId() != id) {
+		if (entity.getID() != id) {
 			throw new NotIdMismatchEntityException();
 		}
 
-		final Optional<T> old = service.findById(id);
+		final Optional<R> old = entityService.findById(id);
 		if (old == null) {
 			throw new NotFoundEntityException();
 		}
 
-		final T updated = service.save(entity);
+		final R updated = entityService.save(entity);
 
 		LOGGER.info("BaseController:update Updated the entry: {}", updated);
 
@@ -144,16 +148,17 @@ public class BaseController<R extends BaseEntityResource, T extends BaseEntity> 
 	public void delete(@PathVariable final Long id) throws NotFoundEntityException, AppException {
 		LOGGER.info("BaseController:delete Deleting a entry with id: {}", id);
 
-		final Optional<T> old = service.findById(id);
+		final Optional<R> old = entityService.findById(id);
 		if (old == null) {
 			throw new NotFoundEntityException();
 		}
 
 		try {
-			service.deleteById(id);
+			entityService.deleteById(id);
 		} catch (Exception e) {
 			throw new AppException();
 		}
 	}
 
+	
 }

@@ -10,7 +10,7 @@ import org.sylrsykssoft.rest.java.musbands.core.controller.resource.BaseAdminRes
 import org.sylrsykssoft.rest.java.musbands.core.domain.BaseAdmin;
 import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
 
-public interface AdminService<T extends BaseAdmin, R extends BaseAdminResource, ID extends Serializable> {
+public interface IAdminService<T extends BaseAdmin, R extends BaseAdminResource, ID extends Serializable> {
 	/**
 	 * Find by name.
 	 * 
