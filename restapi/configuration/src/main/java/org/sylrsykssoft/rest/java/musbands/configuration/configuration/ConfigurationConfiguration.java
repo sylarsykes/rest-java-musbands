@@ -21,38 +21,38 @@ import org.sylrsykssoft.rest.java.musbands.aspects.logger.aspect.LoggerAspect;
 @PropertySource({ "classpath:application.properties", "classpath:logging.properties", "classpath:database.properties" })
 public class ConfigurationConfiguration {
 
-//	/**
-//	 * Datasource
-//	 * 
-//	 * @return
-//	 */
-//	@Bean
-//	@Primary
-//	@ConfigurationProperties(prefix = "spring.datasource")
-//	public DataSource primaryDataSource() {
-//		return DataSourceBuilder.create().build();
-//	}
-//
-//	/**
-//	 * Admin table Datasource
-//	 * 
-//	 * @return
-//	 */
-//	@Bean
-//	@ConfigurationProperties(prefix = "spring.admin-table-datasource")
-//	public DataSource adminTableDataSource() {
-//		return DataSourceBuilder.create().build();
-//	}
-//	/**
-//	 * User Datasource
-//	 * 
-//	 * @return
-//	 */
-//	@Bean
-//	@ConfigurationProperties(prefix = "spring.user-datasource")
-//	public DataSource userDataSource() {
-//		return DataSourceBuilder.create().build();
-//	}
+	/**
+	 * Datasource
+	 * 
+	 * @return
+	 */
+	@Bean
+	@Primary
+	@ConfigurationProperties(prefix = "spring.datasource")
+	public DataSource defaultDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	/**
+	 * Admin table Datasource
+	 * 
+	 * @return
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "spring.admin-table-datasource")
+	public DataSource adminTableDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+	/**
+	 * User Datasource
+	 * 
+	 * @return
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "spring.user-datasource")
+	public DataSource userDataSource() {
+		return DataSourceBuilder.create().build();
+	}
 
 	/**
 	 * Logger aspect.

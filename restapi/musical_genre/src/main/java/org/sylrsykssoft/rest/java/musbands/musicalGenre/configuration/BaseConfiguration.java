@@ -2,12 +2,9 @@ package org.sylrsykssoft.rest.java.musbands.musicalGenre.configuration;
 
 import javax.sql.DataSource;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -27,10 +24,6 @@ public class BaseConfiguration {
 	 * 
 	 * @return
 	 */
-	@Bean
-	@Primary
-	@ConfigurationProperties(prefix = "spring.admin-table-datasource")
-	public DataSource adminTableDataSource() {
-		return DataSourceBuilder.create().build();
-	}
+	@Qualifier("adminTableDataSource")
+	private DataSource adminTableDataSource; 
 }
