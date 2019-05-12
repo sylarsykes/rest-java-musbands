@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.rest.java.musbands.aspects.logger.annotation.Logging;
+import org.sylrsykssoft.rest.java.musbands.core.exception.NotFoundEntityException;
 import org.sylrsykssoft.rest.java.musbands.core.mapper.BaseAdminModelMapperEntityToResourceFunction;
 import org.sylrsykssoft.rest.java.musbands.core.mapper.BaseAdminModelMapperResourceToEntityFunction;
 import org.sylrsykssoft.rest.java.musbands.core.service.BaseAdminService;
@@ -40,8 +41,8 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 * Refresh all the entries in the cache to load new ones
 	 */
 	@Override()
-	@Cacheable("musicalGenres")
-	public Optional<MusicalGenreResource> findByName(final String name) {
+	@Cacheable(value = "musicalGenres", condition = "#result.isPresent()", key = "#result.get().id")
+	public Optional<MusicalGenreResource> findByName(final String name) throws NotFoundEntityException {
 		return super.findByName(name);
 	}
 
@@ -52,7 +53,7 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 * Refresh all the entries in the cache to load new ones
 	 */
 	@Override
-	@Cacheable("musicalGenres")
+	@Cacheable(value = "musicalGenres", unless = "#result != null")
 	public List<MusicalGenreResource> findAll() {
 		return super.findAll();
 	}

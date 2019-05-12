@@ -70,16 +70,12 @@ public class BaseAdminController<R extends BaseAdminResource, T extends BaseAdmi
 	 * @throws NotFoundEntityException
 	 */
 	@GetMapping("/{id}")
-	public Optional<R> findOne(@PathVariable final Integer id) throws NotFoundEntityException {
+	public R findOne(@PathVariable final Integer id) throws NotFoundEntityException {
 		LOGGER.info("BaseController:findOne Find entry with id {}", id);
 		final Optional<R> entity = adminService.findById(id);
 
-		if (entity == null) {
-			throw new NotFoundEntityException();
-		}
-
 		LOGGER.info("BaseController:findOne Found {} entry.", entity);
-		return entity;
+		return entity.get();
 	}
 
 	/**
