@@ -65,13 +65,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@GetMapping(path = "/admin/musicalGenres/{name}")
 	@ResponseBody
-	public Optional<MusicalGenreResource> findByName(@PathVariable final String name) throws NotFoundEntityException {
+	public MusicalGenreResource findByName(@PathVariable final String name) throws NotFoundEntityException {
 		final Optional<MusicalGenreResource> result = musicalGenreService.findByName(name);
-		if (result == null) {
-			throw new NotFoundEntityException();
-		}
-		
-		return result;
+		return result.get();
 	}
 
 	/**
@@ -86,14 +82,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@GetMapping("/admin/musicalGenres/{id}")
 	@ResponseBody
-	public Optional<MusicalGenreResource> findOne(@PathVariable final Integer id) throws NotFoundEntityException {
-		final Optional<MusicalGenreResource> entity = musicalGenreService.findById(id);
-
-		if (entity == null) {
-			throw new NotFoundEntityException();
-		}
-
-		return entity;
+	public MusicalGenreResource findOne(@PathVariable final Integer id) throws NotFoundEntityException {
+		final Optional<MusicalGenreResource> result = musicalGenreService.findById(id);
+		return result.get();
 	}
 
 	/**
